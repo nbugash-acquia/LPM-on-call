@@ -88,7 +88,7 @@ Once you know the person identifier,
 4. Look for `kinesis.recordProcessor.personCapture.personIdentifierSkipList` and add the person identitifier (found from the script above)
 5. Save and wait for at most 15 mins (cache gets expired every 15 mins)
 
-### Restarting an instance
+### Restarting a person capture processor service
 This will restart the awspersoncapture service in the instance
 
         export EC2_INSTANCE_ID=<instance id>;\
