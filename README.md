@@ -67,6 +67,21 @@ You can link the bash scripts (e.g person_identifier_capture_stream.sh) to your 
 
 
 ## Runbooks
+#### General workflow
+To run these "runbooks" command
+1. Update all environment variable specified (e.g SHARD_ID, AWS_PROFILE, etc)
+2. Copy the command
+3. Paste command into the terminal
+
+### SSH into an instance
+
+        export EC2_INSTANCE_ID=<instance id>;\
+        export AWS_PROFILE=<aws profile>;\
+        export AWS_REGION=<aws region>;\
+        ssh $(aws --profile $AWS_PROFILE --region $AWS_REGION \
+                ec2 describe-instances --instance-ids $EC2_INSTANCE_ID \
+                                       --query "Reservations[*].Instances[*].PrivateIpAddress" \
+                                       --output text)
 
 ### Capture stream latency
 This will show which person identifier that has a lot of profile
@@ -81,7 +96,7 @@ This will show which person identifier that has a lot of profile
                                        --output text) \
                'bash -s' < person_identifier_capture_stream.sh $SHARD_ID
                
-Once you know the person identifier, 
+Once you know the person identifier 
 1. You need to go to the LPM dashbord (e.g [US-EAST-1 PROD](us-east-1.lift.acquia.com), [EU-CENTRAL-1 PROD](eu-central-1.lift.acquia.com), etc)
 2. Sign in
 3. Navigate to Configure >> System Applications (in the System Data screen) >> Kinesis
