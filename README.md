@@ -64,12 +64,12 @@ You can link the bash scripts (e.g person_identifier_capture_stream.sh) to your 
                'bash -s' < person_identifier_capture_stream.sh $SHARD_ID
                
 ## Restarting an instance
-export EC2_INSTANCE_ID=i-<instance id>;\
-export ENVIRONMENT=<environment>;\
-export AWS_PROFILE=<aws profile>;\
-export AWS_REGION=<aws region>;\
-ssh $(aws --profile $AWS_PROFILE --region $AWS_REGION \
-            ec2 describe-instances --instance-ids $EC2_INSTANCE_ID \
-                                   --query "Reservations[*].Instances[*].PrivateIpAddress"\
-                                   --output text)\
-           'bash -s' < restart_personcapture_service.sh $AWS_REGION $EC2_INSTANCE_ID $ENVIRONMENT
+        export EC2_INSTANCE_ID=i-<instance id>;\
+        export ENVIRONMENT=<environment>;\
+        export AWS_PROFILE=<aws profile>;\
+        export AWS_REGION=<aws region>;\
+        ssh $(aws --profile $AWS_PROFILE --region $AWS_REGION \
+                    ec2 describe-instances --instance-ids $EC2_INSTANCE_ID \
+                                           --query "Reservations[*].Instances[*].PrivateIpAddress"\
+                                           --output text)\
+                   'bash -s' < restart_personcapture_service.sh $AWS_REGION $EC2_INSTANCE_ID $ENVIRONMENT
