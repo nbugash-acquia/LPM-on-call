@@ -59,5 +59,6 @@ You can link the bash scripts (e.g person_identifier_capture_stream.sh) to your 
         export AWS_REGION=<aws region>;\
         ssh $(aws --profile $AWS_PROFILE --region $AWS_REGION \
                 ec2 describe-instances --instance-ids $EC2_INSTANCE_ID \
-                                       --query "Reservations[*].Instances[*].PrivateIpAddress" --output text)\
+                                       --query "Reservations[*].Instances[*].PrivateIpAddress" \
+                                       --output text) \
                'bash -s' < person_identifier_capture_stream.sh $SHARD_ID
