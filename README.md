@@ -115,3 +115,13 @@ This will restart the awspersoncapture service in the instance
                                            --query "Reservations[*].Instances[*].PrivateIpAddress"\
                                            --output text)\
                    'bash -s' < restart_personcapture_service.sh $AWS_REGION $EC2_INSTANCE_ID $ENVIRONMENT
+                   
+
+### Finding the number of records that still needs to be processed by REDSHIFT
+This will give you the number of records in the `unprocessedData`
+
+        export ENVIRONMENT=<environment>;\
+        export AWS_PROFILE=<aws profile>;\
+        export AWS_REGION=<aws region>;\
+        export DATE=<today's date in the format YYYY-MM-DD e.g: 2020-08-20> ;\
+        aws --profile $ENVIRONMENT --region $AWS_REGION s3 ls s3://lift.$ENVIRONMENT.$AWS_REGION.runtime/kinesisredshift/unprocessedData/$DATE --recursive --human-readable --summarize
