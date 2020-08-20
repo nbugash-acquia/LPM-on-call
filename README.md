@@ -125,3 +125,14 @@ This will give you the number of records in the `unprocessedData`
         export AWS_REGION=<aws region>;\
         export DATE=<today's date in the format YYYY-MM-DD e.g: 2020-08-20> ;\
         aws --profile $ENVIRONMENT --region $AWS_REGION s3 ls s3://lift.$ENVIRONMENT.$AWS_REGION.runtime/kinesisredshift/unprocessedData/$DATE --recursive --human-readable --summarize
+
+Note: This will take a **really long time** if it was run in production on us-east-1. What I suggest is to run the above commands in `nohup`
+Steps:
+1. Connect to an instance in the right region (see [SSH into an instance](#ssh-into-an-instance))
+2. Run the command using `nohup`
+        
+        export ENVIRONMENT=<environment>;\
+        export AWS_PROFILE=<aws profile>;\
+        export AWS_REGION=<aws region>;\
+        export DATE=<today's date in the format YYYY-MM-DD e.g: 2020-08-20> ;\
+        nohup aws --profile $ENVIRONMENT --region $AWS_REGION s3 ls s3://lift.$ENVIRONMENT.$AWS_REGION.runtime/kinesisredshift/unprocessedData/$DATE --recursive --human-readable --summarize &
