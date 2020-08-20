@@ -140,6 +140,18 @@ Steps:
 ### Moving files back from processedData to unprocessedData
 This is not a perfect solution but given how late we worked to stabilizing the system, this is best that we can do
 
+First you need to get a list of accounts.
+
+I ran aws command below
+		
+	export ENVIRONMENT=<environment>;\
+	export AWS_PROFILE=<aws profile>;\
+	export AWS_REGION=<aws region>;\
+	export DATE=<date in the format YYYY-MM-DD e.g: 2020-08-20> ;\
+	aws --profile $ENVIRONMENT --region $AWS_REGION s3 ls s3://lift.$ENVIRONMENT.$AWS_REGION.runtime/kinesisredshift/unprocessedData/$DATE
+
+This will print out the list of all accounts. Next we need to format the output and place them in the python script below
+
 ```python
 #!/bin/python
 
@@ -169,3 +181,4 @@ for date in dates:
 		print("aws s3 mv s3://lift.production."+region+".runtime/kinesisredshift/processedData/"+ date +"/" + table + "/ s3://lift.production." + region + ".runtime/kinesisredshift/unprocessedData/"+ date + "/" + table + "/ --recursive ;\\")
 ```
 
+This will generate a list of aws commands that you need to copy and pasted into a terminal
