@@ -135,7 +135,7 @@ Steps:
         export AWS_PROFILE=<aws profile>;\
         export AWS_REGION=<aws region>;\
         export DATE=<today's date in the format YYYY-MM-DD e.g: 2020-08-20> ;\
-        nohup aws --profile $ENVIRONMENT --region $AWS_REGION s3 ls s3://lift.$ENVIRONMENT.$AWS_REGION.runtime/kinesisredshift/unprocessedData/$DATE --recursive --human-readable --summarize &
+        nohup aws s3 ls s3://lift.$ENVIRONMENT.$AWS_REGION.runtime/kinesisredshift/unprocessedData/$DATE --recursive --human-readable --summarize &
         
 ### Moving files back from processedData to unprocessedData
 This is not a perfect solution but given how late we worked to stabilizing the system, this is best that we can do
