@@ -124,7 +124,7 @@ This will give you the number of records in the `unprocessedData`
         export AWS_PROFILE=<aws profile>;\
         export AWS_REGION=<aws region>;\
         export DATE=<today's date in the format YYYY-MM-DD e.g: 2020-08-20> ;\
-        aws --profile $ENVIRONMENT --region $AWS_REGION s3 ls s3://lift.$ENVIRONMENT.$AWS_REGION.runtime/kinesisredshift/unprocessedData/$DATE --recursive --human-readable --summarize
+        aws --profile $AWS_PROFILE --region $AWS_REGION s3 ls s3://lift.$ENVIRONMENT.$AWS_REGION.runtime/kinesisredshift/unprocessedData/$DATE/ --recursive --human-readable --summarize
 
 Note: This will take a **really long time** if it was run in production on us-east-1. What I suggest is to run the above commands in `nohup`
 Steps:
@@ -148,7 +148,7 @@ I ran aws command below
 	export AWS_PROFILE=<aws profile>;\
 	export AWS_REGION=<aws region>;\
 	export DATE=<date in the format YYYY-MM-DD e.g: 2020-08-20> ;\
-	aws --profile $ENVIRONMENT --region $AWS_REGION s3 ls s3://lift.$ENVIRONMENT.$AWS_REGION.runtime/kinesisredshift/unprocessedData/$DATE
+	aws --profile $AWS_PROFILE --region $AWS_REGION s3 ls s3://lift.$ENVIRONMENT.$AWS_REGION.runtime/kinesisredshift/processedData/$DATE/
 
 This will print out the list of all accounts. Next we need to format the output and place them in the python script below
 
